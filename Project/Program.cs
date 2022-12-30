@@ -6,6 +6,16 @@ Tests(2);
 Tests(3);
 
 int arraySize = InputNumber("Введите размер массива");
+string[] array = FillStringArray(arraySize);
+Console.WriteLine("Ваш массив:");
+PrintStringArray(array);
+
+bool IsLongMoreThanNumber(string text, int number){
+bool result = false;
+int length = text.Length;
+
+return result;
+}
 
 
 

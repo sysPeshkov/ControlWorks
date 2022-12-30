@@ -34,7 +34,15 @@ public class Class1
 
         return arrayResult;
     }
-
+ public static void PrintStringArray(string[] array)
+    {
+        int numberRows = array.Length;
+        
+            for (int j = 0; j < numberRows; j++)
+            {
+                Console.Write($"{array[j]} ");
+            }
+        }
     public static void Print2DStringArray(string[,] array)
     {
         int numberRows = array.GetLength(0);
@@ -43,7 +51,7 @@ public class Class1
         {
             for (int j = 0; j < numberColumns; j++)
             {
-                Console.Write($"{array[i, j]}");
+                Console.Write($"{array[i, j]} ");
             }
             Console.WriteLine();
         }
