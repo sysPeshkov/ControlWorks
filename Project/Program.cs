@@ -10,18 +10,58 @@ string[] array = FillStringArray(arraySize);
 Console.WriteLine("Ваш массив:");
 PrintStringArray(array);
 int amountSymbols = InputNumber("Относительно какого количества символов будем проверять:");
+int isMore = InputNumber("Введите 0 или 1. 0 - вывести елементы с размером меньше или равно. 1 - больше");
+if (isMore != 0 && isMore != 1)
+{
+    isMore = 0;
+}
 string[,] arrayWithMark = GetMoreOrLessElementsFromArray(array, amountSymbols);
+
+//Первый вариант решения
+PrintResultArray(arrayWithMark, isMore);
+
+//Второй вариант решения
+GetArrayWithParthElement(arrayWithMark, isMore);
+
+void GetArrayWithParthElement(string[,] array, int isMore)
+{
+  Console.WriteLine("Второй вариант решения");
+    int amountElement = 0;
+    int length = array.GetLength(1);
+    for (int i = 0; i < length; i++)
+    {
+        if (int.Parse(array[1, i]) == isMore)
+        {
+            amountElement = amountElement + 1;
+        }
+    }
+    string[] resultArray = new string[amountElement];
+  
+    for (int i = 0; i < amountElement; i++)
+    {
+        {
+            Console.Write($"{resultArray[i] }");
+        }
+    }
+
+}
+
+
+
 
 void PrintResultArray(string[,] array, int isMore)
 {
-int amountColumns = array.GetLength(1);   
-for (int i = 0; i < amountColumns; i++)
-{
-    if (int.Parse(array[1, i]) == isMore)
+    Console.WriteLine("Первый вариант решения");
+    int amountColumns = array.GetLength(1);
+
+    for (int i = 0; i < amountColumns; i++)
     {
-        Console.Write($"{array[0,i]}");
+        if (int.Parse(array[1, i]) == isMore)
+        {
+            Console.Write($"{array[0, i]} ");
+        }
     }
-}
+    Console.WriteLine();
 }
 
 
@@ -71,23 +111,48 @@ bool IsLongMoreThanNumber(string text, int number)
 
 void Tests(int numberTest)
 {
+    string[] array;
+    string[,] expectedResult;
+    int isAmountMore = 3;
+    int isContinue = 1;
     if (numberTest == 1)
     {
-        string[] array = new string[4] { "hello", "2", "world", ":-)" };
-        string[,] expectedResult = new string[2, 4] { { "hello", "2", "world", ":-)" }, { "1", "0", "1", "0" } };
+        array = new string[4] { "hello", "2", "world", ":-)" };
+        expectedResult = new string[2, 4] { { "hello", "2", "world", ":-)" }, { "1", "0", "1", "0" } };
     }
     if (numberTest == 2)
     {
-        string[] array = new string[4] { "1234", "1567", "-2", "computer since" };
-        string[,] expectedResult = new string[2, 4] { { "1234", "1567", "-2", "computer since" }, { "1", "1", "0", "1" } };
+        array = new string[4] { "1234", "1567", "-2", "computer since" };
+        expectedResult = new string[2, 4] { { "1234", "1567", "-2", "computer since" }, { "1", "1", "0", "1" } };
     }
     if (numberTest == 3)
     {
-        string[] array = new string[3] { "Russia", "Denmark", "Kazan" };
-        string[,] expectedResult = new string[2, 3] { { "Russia", "Denmark", "Kazan" }, { "1", "1", "1" } };
+        array = new string[3] { "Russia", "Denmark", "Kazan" };
+        expectedResult = new string[2, 3] { { "Russia", "Denmark", "Kazan" }, { "1", "1", "1" } };
     }
     if (numberTest != 1 && numberTest != 2 && numberTest != 3)
     {
         Console.WriteLine("Тесты не были запущены");
+        isContinue = 0;
     }
+
+if (isContinue == 1){
+string[,] resultArray = GetMoreOrLessElementsFromArray(array, isAmountMore);
+
+//Проверка
+int amountRows = resultArray.GetLength(0);
+int amountColumns = resultArray.GetLength(1);
+
+
+for (int i = 0; i < amountRows; i++)
+{
+    for (int j = 0; j < amountColumns; j++)
+    {
+        if (resultArray[i,j] != expectedResult[i,j])
+        {
+            Console.WriteLine($"Тест {numberTest} упал. Ожидается значение {expectedResult[i,j]}, фактический результат {resultArray[i,j]}");
+        }
+    }
+}
+}
 }
