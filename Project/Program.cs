@@ -6,9 +6,24 @@ Tests(2);
 Tests(3);
 
 int arraySize = InputNumber("Введите размер массива");
-//string[] array = FillStringArray(arraySize);
-//Console.WriteLine("Ваш массив:");
-//PrintStringArray(array);
+string[] array = FillStringArray(arraySize);
+Console.WriteLine("Ваш массив:");
+PrintStringArray(array);
+int amountSymbols = InputNumber("Относительно какого количества символов будем проверять:");
+string[,] arrayWithMark = GetMoreOrLessElementsFromArray(array, amountSymbols);
+
+void PrintResultArray(string[,] array, int isMore)
+{
+int amountColumns = array.GetLength(1);   
+for (int i = 0; i < amountColumns; i++)
+{
+    if (int.Parse(array[1, i]) == isMore)
+    {
+        Console.Write($"{array[0,i]}");
+    }
+}
+}
+
 
 string[,] GetMoreOrLessElementsFromArray(string[] array, int amountSymbols)
 {
